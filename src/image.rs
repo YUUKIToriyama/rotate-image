@@ -14,6 +14,25 @@ impl Image {
             height,
         }
     }
+    pub fn from_vec(width: u32, height: u32, vector: Vec<u8>) -> Image {
+        let mut pixels: Vec<Rgba> = vec![];
+        for (index, _) in vector.iter().enumerate() {
+            match index % 4 {
+                3 => pixels.push(Rgba::new(
+                    vector[index - 3],
+                    vector[index - 2],
+                    vector[index - 1],
+                    vector[index],
+                )),
+                _ => continue,
+            }
+        }
+        Image {
+            pixels,
+            width,
+            height,
+        }
+    }
     pub fn get_pixel(&self, w: u32, h: u32) -> &Rgba {
         &self.pixels[(self.width * h + w) as usize]
     }
@@ -54,6 +73,19 @@ mod test_image {
         assert_eq!(pixel.g, 1);
         assert_eq!(pixel.b, 2);
         assert_eq!(pixel.a, 3);
+    }
+
+    #[test]
+    fn from_vec() {
+        let width = 3;
+        let height = 1;
+        let vector: Vec<u8> = vec![0, 0, 0, 0, 255, 255, 255, 255, 156, 0, 255, 64];
+        let image = Image::from_vec(width, height, vector);
+        let pixel = image.get_pixel(2, 0);
+        assert_eq!(pixel.r, 156);
+        assert_eq!(pixel.g, 0);
+        assert_eq!(pixel.b, 255);
+        assert_eq!(pixel.a, 64);
     }
 
     #[test]
