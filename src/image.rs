@@ -17,6 +17,9 @@ impl Image {
     pub fn get_pixel(&self, w: u32, h: u32) -> &Rgba {
         &self.pixels[(self.width * h + w) as usize]
     }
+    pub fn put_pixel(&mut self, w: u32, h: u32, pixel: Rgba) {
+        self.pixels[(self.width * h + w) as usize] = pixel;
+    }
 }
 
 #[cfg(test)]
@@ -51,5 +54,16 @@ mod test_image {
         assert_eq!(pixel.g, 1);
         assert_eq!(pixel.b, 2);
         assert_eq!(pixel.a, 3);
+    }
+
+    #[test]
+    fn put_pixel() {
+        let mut image = Image::new(5, 5);
+        image.put_pixel(3, 2, Rgba::new(8, 100, 99, 34));
+        let pixel = image.get_pixel(3, 2);
+        assert_eq!(pixel.r, 8);
+        assert_eq!(pixel.g, 100);
+        assert_eq!(pixel.b, 99);
+        assert_eq!(pixel.a, 34);
     }
 }
