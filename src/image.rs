@@ -33,6 +33,16 @@ impl Image {
             height,
         }
     }
+    pub fn to_u8_vec(&self) -> Vec<u8> {
+        let mut vector: Vec<u8> = vec![];
+        for pixel in &self.pixels {
+            vector.push(pixel.r);
+            vector.push(pixel.g);
+            vector.push(pixel.b);
+            vector.push(pixel.a);
+        }
+        vector
+    }
     pub fn get_pixel(&self, w: u32, h: u32) -> &Rgba {
         &self.pixels[(self.width * h + w) as usize]
     }
@@ -43,6 +53,8 @@ impl Image {
 
 #[cfg(test)]
 mod test_image {
+    use std::vec;
+
     use super::*;
 
     #[test]
@@ -86,6 +98,26 @@ mod test_image {
         assert_eq!(pixel.g, 0);
         assert_eq!(pixel.b, 255);
         assert_eq!(pixel.a, 64);
+    }
+
+    #[test]
+    fn to_u8_vec() {
+        let width: u32 = 4;
+        let height: u32 = 3;
+        let pixels: Vec<Rgba> = vec![
+            Rgba::new(255, 255, 255, 255),
+            Rgba::new(0, 0, 0, 156),
+            Rgba::new(156, 255, 0, 0),
+        ];
+        let image = Image {
+            pixels,
+            width,
+            height,
+        };
+        assert_eq!(
+            image.to_u8_vec(),
+            vec![255, 255, 255, 255, 0, 0, 0, 156, 156, 255, 0, 0]
+        );
     }
 
     #[test]
