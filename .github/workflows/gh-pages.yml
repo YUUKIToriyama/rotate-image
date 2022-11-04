@@ -13,6 +13,8 @@ jobs:
     steps:
       - name: Do checkout
         uses: actions/checkout@v3
+      - name: Install wasm-pack
+        run: cargo install wasm-pack
       - name: Build wasm module
         run: wasm-pack build --target web
       - name: Copy products to ./demo directory
