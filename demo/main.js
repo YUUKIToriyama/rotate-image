@@ -1,4 +1,4 @@
-import init, { ImageConverter } from "../pkg/rotate_image.js";
+import init, { ImageConverter } from "./pkg/rotate_image.js";
 
 await init();
 
