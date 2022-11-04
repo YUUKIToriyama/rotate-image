@@ -12,7 +12,7 @@ pub fn rotate_image(src: &Image, angle: f32) -> Image {
                 - (v as i64 - (dst.height / 2) as i64) as f32 * angle.sin()
                 + (src.width / 2) as f32;
             let y = (u as i64 - (dst.width / 2) as i64) as f32 * angle.sin()
-                - (v as i64 - (dst.height / 2) as i64) as f32 * angle.cos()
+                + (v as i64 - (dst.height / 2) as i64) as f32 * angle.cos()
                 + (src.height / 2) as f32;
 
             if 0.0 < x && x < (src.width - 1) as f32 && 0.0 < y && y < (src.height - 1) as f32 {
