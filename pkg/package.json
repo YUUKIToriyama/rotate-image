@@ -1,0 +1,12 @@
+{
+  "name": "rotate-image",
+  "version": "0.1.0",
+  "files": [
+    "rotate_image_bg.wasm",
+    "rotate_image.js",
+    "rotate_image.d.ts"
+  ],
+  "module": "rotate_image.js",
+  "types": "rotate_image.d.ts",
+  "sideEffects": false
+}
