@@ -2,8 +2,8 @@ use crate::{image::Image, rgba::Rgba};
 
 pub fn rotate_image(src: &Image, angle: f32) -> Image {
     let mut dst = Image::new(
-        (src.width as f32 * angle.cos() + src.height as f32 * angle.sin()) as u32,
-        (src.width as f32 * angle.sin() + src.height as f32 * angle.cos()) as u32,
+        (src.width as f32 * angle.cos().abs() + src.height as f32 * angle.sin().abs()) as u32,
+        (src.width as f32 * angle.sin().abs() + src.height as f32 * angle.cos().abs()) as u32,
     );
 
     for v in 0..dst.height - 1 {
