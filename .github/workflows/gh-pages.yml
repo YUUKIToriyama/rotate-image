@@ -1,0 +1,24 @@
+name: Deploy demo page to GitHub Pages
+on: 
+  push:
+    branches:
+      - "main"
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Do checkout
+        uses: actions/checkout@v3
+      - name: Build wasm module
+        run: wasm-pack build --target web
+      - name: Copy products to ./demo directory
+        run: cp -r pkg/ demo/
+      - name: Deploy files to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./demo
