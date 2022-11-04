@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Demo | rotate-image</title>
+    <link rel="stylesheet" href="./style.css" />
+</head>
+
+<body>
+    <h2>画像の回転</h2>
+    <p>任意の角度に画像を回転することができます</p>
+    <table>
+        <tr>
+            <td class="caption">
+                <h3>入力</h3>
+                <input type="file" id="inputFile" name="inputFile" accept="image/*" />
+            </td>
+            <td class="caption">
+                <h3>出力画像</h3>
+                <label for="inputNumber">角度(度数法)</label>
+                <input type="number" min="0" max="360" id="inputNumber" name="inputNumber" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <canvas id="canvasInput"></canvas>
+            </td>
+            <td>
+                <canvas id="canvasOutput"></canvas>
+            </td>
+        </tr>
+    </table>
+    <script src="./main.js" type="module"></script>
+</body>
+
+</html>
